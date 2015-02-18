@@ -423,6 +423,7 @@
     <Folder Include="Content\jqx\images\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\bootstrap.css.map" />
     <None Include="Content\jqx\images\Thumbs.db" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.svg" />
@@ -436,6 +437,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Views\Ajax\Hello.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
     <None Include="Web References\Hydro\Category.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -541,7 +544,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2720</DevelopmentServerPort>
+          <DevelopmentServerPort>1449</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
