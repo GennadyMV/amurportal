@@ -52,7 +52,7 @@
         </li>
       </ul>
       <form class="navbar-form navbar-left">
-        <button type="submit" class="btn btn-default" onclick="SelectPost()" >Выбрать пост</button>
+        <input type="button" name="submit" class="btn btn-default" value="Выбрать пост" onclick="SelectPost()"/>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
@@ -137,13 +137,14 @@
         $('#customWindow').jqxWindow({ width: 400,
             height: 110, resizable: false,
             cancelButton: $('#cancelButton'),
+            autoOpen: false,
             initContent: function () {
                 $('#searchTextButton').jqxButton({ width: '80px', disabled: true });
                 $('#cancelButton').jqxButton({ width: '80px', disabled: false });
                 $('#matchCaseCheckBox').jqxCheckBox({ width: '150px' });
             }
         });
-        
+
     });
 
 
