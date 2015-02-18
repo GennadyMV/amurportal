@@ -4,6 +4,7 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jqx/jqx.base.css")" rel="stylesheet" type="text/css" />
 
     <script src="@Url.Content("~/Scripts/jquery-1.11.2.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
@@ -129,9 +130,46 @@
 
 <script>
     function SelectPost() {
-        alert("D");
+        $('#customWindow').jqxWindow('open');
     }
+
+    $(document).ready(function () {
+        $('#customWindow').jqxWindow({ width: 400,
+            height: 110, resizable: false,
+            cancelButton: $('#cancelButton'),
+            initContent: function () {
+                $('#searchTextButton').jqxButton({ width: '80px', disabled: true });
+                $('#cancelButton').jqxButton({ width: '80px', disabled: false });
+                $('#matchCaseCheckBox').jqxCheckBox({ width: '150px' });
+            }
+        });
+        
+    });
+
+
+
 </script>
+
+<div id="customWindow">
+                <div id="customWindowHeader">
+                    <span id="captureContainer" style="float: left">Find </span>
+                </div>
+                <div id="customWindowContent" style="overflow: hidden">
+                    <div style="margin: 10px">
+                        Fi<u>n</u>d what:
+                        <input type="text" style="width: 175px; border: 1px solid #aaa" id="searchTextInput" />
+                        <div style="float: right">
+                            <input type="button" value="Find Next" style="margin-bottom: 5px;" id="searchTextButton" /><br />
+                            <input type="button" value="Cancel" id="cancelButton" />
+                        </div>
+                        <br />
+                        <br />
+                        <div id="matchCaseCheckBox">
+                        Match case</div>
+                </div>
+            </div>
+
+
 
     @RenderBody()
 </body>
