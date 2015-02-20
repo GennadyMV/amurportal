@@ -27,16 +27,52 @@
     }
 
     $(document).ready(function () {
-        $('#customWindow').jqxWindow({ width: 400,
-            height: 110, resizable: false,
+        $('#customWindow').jqxWindow({ width: 500,
+            height: 500, resizable: false,
             cancelButton: $('#cancelButton'),
             autoOpen: false,
             initContent: function () {
-                $('#searchTextButton').jqxButton({ width: '80px', disabled: true });
-                $('#cancelButton').jqxButton({ width: '80px', disabled: false });
-                $('#matchCaseCheckBox').jqxCheckBox({ width: '150px' });
+                $('#buttonOk').jqxButton({ width: '80px', disabled: false });
+                $('#buttonCancel').jqxButton({ width: '80px' });
             }
         });
+
+
+        var url = '@Url.Action("GetSites", "Ajax")';
+
+        // prepare the data
+        var source =
+{
+    dataType: "json",
+    dataFields: [
+        { name: 'Name', type: 'string' },
+        { name: 'TypeName', type: 'string' }
+    ],
+    id: 'id',
+    url: url
+};
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        $("#dataTable").jqxDataTable(
+{
+    width: 450,
+    height: 400,
+    source: dataAdapter,
+    pageable: true,
+    pagerButtonsCount: 3,
+    pageSize: 50,
+    filterable: true,
+    columnsResize: true,
+
+    ready: function () {
+        $("#dataTable").jqxDataTable('hideColumn', 'name');
+    },
+    columns: [
+        { text: 'Name', dataField: 'Name', width: 200 },
+        { text: 'TypeName', dataField: 'TypeName', width: 200 }
+    ]
+}); 
+
 
     });
 
@@ -45,23 +81,24 @@
 </script>
 
 
+<script>
 
-<div id="customWindow">
-                <div id="customWindowHeader">
-                    <span id="captureContainer" style="float: left">Find </span>
-                </div>
-                <div id="customWindowContent" style="overflow: hidden">
-                    <div style="margin: 10px">
-                        Fi<u>n</u>d what:
-                        <input type="text" style="width: 175px; border: 1px solid #aaa" id="searchTextInput" />
-                        <div style="float: right">
-                            <input type="button" value="Find Next" style="margin-bottom: 5px;" id="searchTextButton" /><br />
-                            <input type="button" value="Cancel" id="cancelButton" />
-                        </div>
+    
+</script>
+
+
+        <div id="customWindow">
+            <div id="customWindowHeader">
+                <span id="captureContainer" style="float: left">Find </span>
+            </div>
+            <div id="customWindowContent" style="overflow: hidden">
+                <div style="margin: 10px">
+                    <div id="dataTable"></div>                        
+                    <div style="float: left">
                         <br />
-                        <br />
-                        <div id="matchCaseCheckBox">
-                        Match case</div>
+                        <input type="button" value="Выбрать" style="margin-bottom: 5px;" id="buttonOk" />
+                        <input type="button" value="Отмена" id="buttonCancel" />
+                    </div>                    
                 </div>
             </div>
         </div>
