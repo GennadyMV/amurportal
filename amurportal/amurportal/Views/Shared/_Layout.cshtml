@@ -24,6 +24,9 @@
 <script>
     function SelectPost() {
         $('#customWindow').jqxWindow('open');
+
+
+
     }
 
     $(document).ready(function () {
@@ -32,10 +35,11 @@
             cancelButton: $('#cancelButton'),
             autoOpen: false,
             initContent: function () {
-                $('#buttonOk').jqxButton({ width: '80px', disabled: false });
+                $('#buttonOk').jqxButton({ width: '80px', disabled: true });
                 $('#buttonCancel').jqxButton({ width: '80px' });
             }
         });
+
 
 
         var url = '@Url.Action("GetSites", "Ajax")';
@@ -45,6 +49,7 @@
 {
     dataType: "json",
     dataFields: [
+        { name: 'SiteCode', type: 'string' },
         { name: 'Name', type: 'string' },
         { name: 'TypeName', type: 'string' }
     ],
@@ -63,15 +68,60 @@
     pageSize: 50,
     filterable: true,
     columnsResize: true,
-
     ready: function () {
         $("#dataTable").jqxDataTable('hideColumn', 'name');
     },
     columns: [
-        { text: 'Name', dataField: 'Name', width: 200 },
-        { text: 'TypeName', dataField: 'TypeName', width: 200 }
+        { text: 'Код', dataField: 'SiteCode', width: 100 },
+        { text: 'Станция', dataField: 'Name', width: 200 },
+        { text: 'Тип', dataField: 'TypeName', width: 200 }
     ]
-}); 
+});
+
+
+        $('#dataTable').on('rowSelect',
+            function (event) {
+                var args = event.args;
+                var row = args.row;
+                var index = args.index;
+                var boundIndex = args.boundIndex;
+                var key = args.key;
+                var dataField = args.dataField;
+                var clickEvent = args.originalEvent;
+                var value = $("#dataTable").jqxDataTable('getCellValue', index, 'SiteCode');
+
+                $('#buttonOk').jqxButton({ width: '80px', disabled: false });
+
+            });
+
+        $('#dataTable').on('rowUnselect',
+            function (event) {
+                var args = event.args;
+                var row = args.row;
+                var index = args.index;
+                var boundIndex = args.boundIndex;
+                var key = args.key;
+                var dataField = args.dataField;
+                var clickEvent = args.originalEvent;
+                var value = $("#dataTable").jqxDataTable('getCellValue', index, 'SiteCode');
+
+                $('#buttonOk').jqxButton({ width: '80px', disabled: true });
+
+            });
+
+        $('#buttonOk').on('click', function () {
+            var selection = $("#dataTable").jqxDataTable('getSelection');            
+            var value = $("#dataTable").jqxDataTable('getCellValue', selection[0], 'SiteCode');
+            $('#customWindow').jqxWindow('close');
+            $('#MenuHeaderSiteName').text(selection[0].Name);
+        });
+
+
+        $('#buttonCancel').on('click', function () {
+            $('#customWindow').jqxWindow('close');
+        });
+
+
 
 
     });
