@@ -13,6 +13,7 @@ namespace amurportal.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.DateBgn = DateTime.Now;
             return View();
         }
 
