@@ -80,7 +80,8 @@ namespace amurportal.Controllers
         public ActionResult GetAllDataValue(int SiteId, string utcDateDDMMYYYY)
         {
             Hydro.HydroService theHydro = new HydroService();
-            DateTime utcDate = DateTime.ParseExact(utcDateDDMMYYYY + " 00:00:00", "ddMMyyyy H:mm:ss", new CultureInfo("en-US"));
+            DateTime utcDateBgn = DateTime.ParseExact(utcDateDDMMYYYY + " 00:00:00", "ddMMyyyy H:mm:ss", new CultureInfo("en-US"));
+            DateTime utcDateEnd = DateTime.ParseExact(utcDateDDMMYYYY + " 23:59:59", "ddMMyyyy H:mm:ss", new CultureInfo("en-US"));
 
             Hydro.Site[] _sites = theHydro.GetSiteList(null, true);
             int siteTypeId = 0;
@@ -102,7 +103,14 @@ namespace amurportal.Controllers
 
             foreach (var variable in theVariables)
             {
-                Hydro.DataValue[] theDataValues = theHydro.GetAllDataValue(SiteId, false, utcDate, true, variable.Id, false, null, false, null, false);
+                Hydro.DataValue[] theDataValues = theHydro.GetDataValuesForReport(SiteId, true, 
+                                                                utcDateBgn, true,
+                                                                utcDateEnd, true,
+                                                                variable.Id, true,
+                                                                1, true,
+                                                                null, true,
+                                                                null, true, 
+                                                                null, true);
                 if (theDataValues == null) continue;
                 List<Hydro.DataValue> theDataValuesList = new List<Hydro.DataValue>();
                 foreach (var value in theDataValues)
