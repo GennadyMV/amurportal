@@ -440,6 +440,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Ajax\GetSiteParams.cshtml" />
+    <Content Include="Views\Ajax\GetAllDataValue.cshtml" />
     <None Include="Web References\Hydro\Category.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

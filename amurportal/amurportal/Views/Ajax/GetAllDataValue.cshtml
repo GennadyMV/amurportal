@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "GetAllDataValue";
+}
+
+@{
+    Layout = "";
+}
+
+
+<div id='jqxTabsDataValues'>
+    <ul>
+        @foreach (var item in ViewBag.Variables)
+        {
+            <li>
+                @item.Name
+            </li>
+        }        
+    </ul>
+
+    @foreach (var item in ViewBag.Variables)
+    {
+        <div>
+            @if (ViewBag.dictionary_in.ContainsKey(item.Name))
+            {
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+
+                            @foreach (var value in ViewBag.dictionary_in[item.Name])
+                            {
+                                <tr>
+                                    <td>value.Value</td>                            
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+            }
+            else
+            {
+                <p>Измерения отсутствуют</p>
+            }
+        </div>
+    }
+    
+</div>
+
+
+
+
