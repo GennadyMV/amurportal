@@ -47,5 +47,87 @@ namespace amurportal.Models
         public int SiteId { get; set; }
         [JsonProperty("UtcOffset")]
         public float UtcOffset { get; set; }
+        [JsonProperty("LatLongDatumID")]
+        public int LatLongDatumID { get; set; }
+        [JsonProperty("Elevation_m")]
+        public float Elevation_m { get; set; }
+        [JsonProperty("LocalProjectionID")]
+        public int LocalProjectionID { get; set; }
+        [JsonProperty("isComplex")]
+        public bool isComplex { get; set; }
+
+
+
+        public Site(Hydro.Site site)
+        {
+            this.TypeId = site.Type.Id;
+            this.TypeName = site.Type.Name;
+            this.TypeNameShort = site.Type.ShortName;
+            this.Border = site.Border;
+            this.Comment = site.Comment;
+            this.Id = site.Id;
+
+            if (site.Lat != null)
+            {
+                this.Lat = (decimal)site.Lat;
+            }
+            else
+            {
+                this.Lat = -1;
+            }
+            if (site.Lon != null)
+            {
+                this.Lon = (decimal)site.Lon;
+            }
+            else
+            {
+                this.Lon = -1;
+            }
+
+            if (site.LatLonDatumId != null)
+            {
+                this.LatLongDatumID = (int)site.LatLonDatumId;
+            }
+            else
+            {
+                this.LatLongDatumID = -1;
+            }
+
+            if (site.Height != null)
+            {
+                this.Height = (float)site.Height;
+                this.Elevation_m = (float)site.Height;
+            }
+            else
+            {
+                this.Height = -1;
+                this.Elevation_m = -1;
+            }
+
+            if (site.LocalProjectionId != null)
+            {
+                this.LocalProjectionID = (int)site.LocalProjectionId;
+            }
+            else
+            {
+                this.LocalProjectionID = -1;
+            }
+
+            if (site.RegionId != null)
+            {
+                this.RegionId = (int)site.RegionId;
+            }
+            else
+            {
+                this.RegionId = -1;
+            }
+
+            this.isComplex = site.IsComplex;
+            this.Name = site.Name;
+            this.SiteCode = site.SiteCode;
+            this.SiteId = site.SiteId;
+            this.UtcOffset = site.UtcOffset;
+            this.Id = site.Id;
+        }
     }
 }

@@ -439,6 +439,7 @@
     <Content Include="Views\Ajax\Hello.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Ajax\GetSiteParams.cshtml" />
     <None Include="Web References\Hydro\Category.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -544,7 +545,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2000</DevelopmentServerPort>
+          <DevelopmentServerPort>2638</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -18,6 +18,9 @@
 
 <body>
 
+    <input type="hidden" id="main_site_id" name="main_site_id" value="">
+
+
 @Html.Partial("_Header")
 @Html.Partial("_Footer")
 
@@ -48,7 +51,9 @@
     dataFields: [
         { name: 'SiteCode', type: 'string' },
         { name: 'Name', type: 'string' },
-        { name: 'TypeName', type: 'string' }
+        { name: 'TypeName', type: 'string' },
+        { name: 'SiteId', type: 'string' },
+        { name: 'Id', type: 'string' }
     ],
     id: 'id',
     url: url
@@ -107,10 +112,12 @@
             });
 
         $('#buttonOk').on('click', function () {
-            var selection = $("#dataTable").jqxDataTable('getSelection');            
+            var selection = $("#dataTable").jqxDataTable('getSelection');
             var value = $("#dataTable").jqxDataTable('getCellValue', selection[0], 'SiteCode');
             $('#customWindow').jqxWindow('close');
             $('#MenuHeaderSiteName').text(selection[0].Name);
+            $('#main_site_id').text(selection[0].SiteId);
+            LoadParams(selection[0].SiteId);
         });
 
 

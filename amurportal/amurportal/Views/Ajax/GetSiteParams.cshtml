@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "GetSiteParams";
+}
+
+@{
+    Layout = "";
+}
+
+@model amurportal.Models.Site
+           
+
+<table class="table table-bordered table-hover">
+    <tbody>
+        <tr>
+            <td>Идентификатор</td>
+            <td>@Model.SiteId</td>
+        </tr>
+        <tr>
+            <td>Код, присвоенный месту производства наблюдений</td>
+            <td>@Model.SiteCode</td>
+        </tr>        
+        <tr>
+            <td>Типа сайта</td>
+            <td>@Model.TypeName</td>
+        </tr>
+        <tr>
+            <td>Наименование места производства наблюдений</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Широта места</td>
+            <td>@Model.Lat</td>
+        </tr>
+        <tr>
+            <td>Долгота места</td>
+            <td>@Model.Lon</td>
+        </tr>
+        <tr>
+            <td>Идентификатор датума</td>
+            <td>@Model.LatLongDatumID</td>
+        </tr>
+        <tr>
+            <td>Высота места над датумом</td>
+            <td>@Model.Height</td>
+        </tr>
+        <tr>
+            <td>X-координата в локальной системе координат</td>
+            <td>@Model.LocalX</td>
+        </tr>
+        <tr>
+            <td>Y-координата в локальной системе координат</td>
+            <td>@Model.LocalY</td>
+        </tr>
+        <tr>
+            <td>Идентификатор локальной проекции</td>
+            <td>@Model.LocalProjectionID</td>
+        </tr>
+        <tr>
+            <td>Точность определения локальных координат</td>
+            <td>@Model.PosAccuracy_m</td>
+        </tr>
+        <tr>
+            <td>Идентификатор региона, в котором расположено место</td>
+            <td>@Model.RegionId</td>
+        </tr>
+        <tr>
+            <td>Флаг, показывающий, входят ли в данное место другие места</td>
+            <td>@Model.isComplex</td>
+        </tr>
+        <tr>
+            <td>Поле, для хранения координат границы места</td>
+            <td>@Model.Border</td>
+        </tr>
+        <tr>
+            <td>Смещение часового пояса относительно UTC</td>
+            <td>@Model.UtcOffset</td>
+        </tr>        
+        <tr>
+            <td>Комментарий</td>
+            <td>@Model.Comment</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+

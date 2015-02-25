@@ -6,6 +6,7 @@
     <ul>
         <li style="margin-left: 30px;">Мониторинг</li>
         <li>Отчёт</li>    
+        <li>Параметры</li>
     </ul>
     <div>
         Мониторинг
@@ -14,6 +15,10 @@
         Отчёт
         <div id='jqxDateTimeInput'></div>
     </div>
+    <div>
+        <div id='params_result'>            
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -21,7 +26,25 @@
         // Create jqxTabs.
         $('#jqxTabs').jqxTabs({ width: '100%', height: '500', position: 'top' });
 
-        $("#jqxDateTimeInput").jqxDateTimeInput({ min: new Date(2010, 0, 1), max: new Date(2020, 11, 31), width: '250px', height: '25px' }); 
-        
+        $("#jqxDateTimeInput").jqxDateTimeInput({ min: new Date(2010, 0, 1), max: new Date(2020, 11, 31), width: '250px', height: '25px' });
+
     });
-    </script>
+
+    function LoadParams(SiteId) {
+        var param = { siteid: SiteId };
+        
+        $.ajax({
+            cache: false,
+            url: '@Url.Action("GetSiteParams", "Ajax")',
+            data: param,
+            success: function (data) {
+                document.getElementById("params_result").innerHTML = data;
+            },
+            error: function (x, e, thrownError) {
+                document.getElementById("params_result").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';
+            }
+        });
+
+        document.getElementById("params_result").innerHTML = "Загрузка";
+    }
+</script>
