@@ -2,35 +2,33 @@
     ViewBag.Title = "Index";
 }
 
-<div id='jqxTabs'>
-    <ul>
-        <li style="margin-left: 30px;">Мониторинг</li>
-        <li>Измерения</li>    
-        <li>Параметры</li>
-    </ul>
-    <div>
-        Мониторинг
-    </div>
-    <div>
-        Измерения
-        <div id='jqxDateTimeInput'></div>
-        
-        <div id='datavalues_result'>            
-        </div>
+<div role="tabpanel">
 
-    </div>
-    <div>
-        <div id='params_result'>            
-        </div>
-    </div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#monitoring" aria-controls="monitoring" role="tab" data-toggle="tab">Мониторинг</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#datavalues" aria-controls="datavalues" role="tab" data-toggle="tab">Измерения</a></li>
+    <li role="presentation"><a href="#params" aria-controls="params" role="tab" data-toggle="tab">Параметры</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="monitoring">Мониторинг</div>
+    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+    <div role="tabpanel" class="tab-pane" id="datavalues"><div id="datavalues_result"></div></div>
+    <div role="tabpanel" class="tab-pane" id="params"><div id="params_result"></div></div>
+  </div>
+
 </div>
+
+
 
 <script type="text/javascript">
     $(document).ready(function () {
-        // Create jqxTabs.
-        $('#jqxTabs').jqxTabs({ width: '100%', height: '100%', position: 'top' });
+        
 
-        $("#jqxDateTimeInput").jqxDateTimeInput({ min: new Date(2010, 0, 1), max: new Date(2020, 11, 31), width: '250px', height: '25px' });
+       // $("#jqxDateTimeInput").jqxDateTimeInput({ min: new Date(2010, 0, 1), max: new Date(2020, 11, 31), width: '250px', height: '25px' });
 
     });
 
@@ -53,7 +51,7 @@
     }
 
     function LoadDataValues(SiteId) {
-        var param = { siteid: SiteId, utcDateDDMMYYYY: "24022015" };
+        var param = { siteid: SiteId, utcDateDDMMYYYY: "23022015" };
 
         $.ajax({
             cache: false,
@@ -61,7 +59,7 @@
             data: param,
             success: function (data) {
                 document.getElementById("datavalues_result").innerHTML = data;
-                $('#jqxTabsDataValues').jqxTabs({ width: '100%', height: '100%', position: 'top' });
+                //$('#jqxTabsDataValues').jqxTabs({ width: '100%', height: '100%', position: 'top' });
             },
             error: function (x, e, thrownError) {
                 document.getElementById("datavalues_result").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';                

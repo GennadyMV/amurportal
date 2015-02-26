@@ -103,11 +103,10 @@ namespace amurportal.Controllers
 
             foreach (var variable in theVariables)
             {
-                Hydro.DataValue[] theDataValues = theHydro.GetDataValuesForReport(SiteId, true, 
+                Hydro.DataValue[] theDataValues = theHydro.GetDataValues(SiteId, true, 
                                                                 utcDateBgn, true,
                                                                 utcDateEnd, true,
                                                                 variable.Id, true,
-                                                                1, true,
                                                                 null, true,
                                                                 null, true, 
                                                                 null, true);
