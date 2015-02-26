@@ -6,10 +6,67 @@
     Layout = "";
 }
 
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                   Дата UTC
+            </th>
+            @foreach (var v in ViewBag.VariableList)
+            {             
+                <th>
+                    @v
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (var item in ViewBag.UtcDateStrings)
+        {
+            <tr>
+                <td>
+                    @String.Format("{0:dd.MM.yyyy HH:mm:ss}",DateTime.ParseExact(@item, "yyyyMMddHHmmss",
+                                       System.Globalization.CultureInfo.InvariantCulture))
+                    
+                </td>
+                @foreach (var v in ViewBag.VariableList)
+                {             
+                    <th>                        
+                        @if (ViewBag.dictionary_in.ContainsKey(v))
+                        {
+                            
+                                int isFinded = 0;
+                            
+                            foreach (var value in ViewBag.dictionary_in[v])
+                            {
+                                if (String.Format("{0:yyyyMMddHHmmss}", value.DateUTC) == item)
+                                {
+                                    {
+                                        isFinded = 1;
+                                    }
+                                    
+                                   @value.Value
+                                      
+                              break;
+                                }
+                            }
+                            if(@isFinded==0)                            
+                            {
+                                <em>Данных нет</em>
+                            }
+                        }
+                    </th>
+                }
+            
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!--
 <hr />
 <div role="tabpanel">
 
-  <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     @{
         int index = -1;
@@ -32,10 +89,9 @@
     }    
   </ul>
 
-  <!-- Tab panes -->
   <div class="tab-content">
     @{
-        index = -1; 
+        index = -1;
         string is_active = "";        
     }
     @foreach (var item in ViewBag.Variables)

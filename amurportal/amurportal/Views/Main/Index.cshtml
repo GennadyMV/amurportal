@@ -16,7 +16,62 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="monitoring">Мониторинг</div>
     <div role="tabpanel" class="tab-pane" id="profile">...</div>
-    <div role="tabpanel" class="tab-pane" id="datavalues"><div id="datavalues_result"></div></div>
+    <div role="tabpanel" class="tab-pane" id="datavalues">
+        <div id="sandbox-container">
+            <div class="input-daterange input-group" id="datepicker">
+                <span class="input-group-addon">Начало периода:</span>
+                <input id="datepicker_start" type="text" value="@(ViewBag.DateBgn)" class="input-sm form-control" name="start" />
+                <span class="input-group-addon">Конец периода:</span>
+                <input id="datepicker_end" type="text" value="@(ViewBag.DateEnd)" class="input-sm form-control" name="end" />                
+            </div>            
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#sandbox-container .input-daterange').datepicker({
+                    todayBtn: true,
+                    clearBtn: true,
+                    language: "ru",
+                    calendarWeeks: true,
+                    autoclose: true,
+                    todayHighlight: true,
+
+            
+             });
+
+             
+             $('#sandbox-container .input-daterange').datepicker()
+                             .on('show', function (ev) {
+                        ev.stopPropagation();
+                    })
+                    .on('changeDate', function (ev, date) {
+                        
+                        
+                        console.log( $("#flag").val() );
+                        if ($("#flag").val() == 1) {
+                         
+                         console.log("D");
+                         console.log( $("#main_site_id").val() );
+                         LoadDataValues( $("#main_site_id").val() );
+
+                         $("#flag").val("0");
+                         console.log( $("#flag").val() );
+                        } else {
+                        $("#flag").val("1");
+                        }
+                        
+                        
+                        ev.stopPropagation();
+                    });
+                   
+
+
+             });
+
+             
+    </script>
+        <div id="datavalues_result"></div>
+    </div>
     <div role="tabpanel" class="tab-pane" id="params"><div id="params_result"></div></div>
   </div>
 
@@ -25,12 +80,6 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        
-
-       // $("#jqxDateTimeInput").jqxDateTimeInput({ min: new Date(2010, 0, 1), max: new Date(2020, 11, 31), width: '250px', height: '25px' });
-
-    });
 
     function LoadParams(SiteId) {
         var param = { siteid: SiteId };
@@ -51,11 +100,14 @@
     }
 
     function LoadDataValues(SiteId) {
-        var param = { siteid: SiteId, utcDateDDMMYYYY: "23022015" };
+        var param = { siteid: SiteId, date_start: $("#datepicker_start").val(), date_end: $("#datepicker_end").val() };
+
+        console.log($("#datepicker_start").val());
+        console.log($("#datepicker_end").val());
 
         $.ajax({
             cache: false,
-            url: '@Url.Action("GetAllDataValue", "Ajax")',
+            url: '@Url.Action("GetDataValues", "Ajax")',
             data: param,
             success: function (data) {
                 document.getElementById("datavalues_result").innerHTML = data;

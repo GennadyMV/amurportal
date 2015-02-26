@@ -5,10 +5,13 @@
     <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/jqx/jqx.base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/datepicker3.css")" rel="stylesheet" type="text/css" />
 
     <script src="@Url.Content("~/Scripts/jquery-1.11.2.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jqx-all.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")" type="text/javascript"></script>  
+    <script src="@Url.Content("~/Scripts/locales/bootstrap-datepicker.ru.js")" type="text/javascript"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="@Url.Content("~/Scripts/html5shiv.min.js")"></script>
@@ -19,6 +22,7 @@
 <body>
 
     <input type="hidden" id="main_site_id" name="main_site_id" value="">
+    <input type="hidden" id="flag" name="flag" value="0">
 
 
 @Html.Partial("_Header")
@@ -116,7 +120,7 @@
             var value = $("#dataTable").jqxDataTable('getCellValue', selection[0], 'SiteCode');
             $('#customWindow').jqxWindow('close');
             $('#MenuHeaderSiteName').text(selection[0].Name);
-            $('#main_site_id').text(selection[0].SiteId);
+            $('#main_site_id').val(selection[0].SiteId);
             LoadParams(selection[0].SiteId);
             LoadDataValues(selection[0].SiteId);
         });

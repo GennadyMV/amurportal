@@ -13,7 +13,8 @@ namespace amurportal.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.DateBgn = DateTime.Now;
+            ViewBag.DateBgn = String.Format("{0:dd.MM.yyyy}", DateTime.Now.AddDays(-30));
+            ViewBag.DateEnd = String.Format("{0:dd.MM.yyyy}", DateTime.Now);
             return View();
         }
 
