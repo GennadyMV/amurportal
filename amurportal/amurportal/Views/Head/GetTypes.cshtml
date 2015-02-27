@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "GetTypes";
+}
+
+@{
+    Layout = "";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Полное наименование</th>
+            <th>Короткое наименование</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (var item in ViewBag.SiteTypes)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>   
+                <td>
+                    @item.Name
+                </td>                   
+                <td>
+                    @item.ShortName
+                </td>                       
+                <td>
+                    <input  data-toggle="collapse" data-target="#collapse_sites_@(item.Id)" class="accordion-toggle btn btn-primary" type="button" value="Список станций" onclick="LoadSitesByType(@(item.Id))">
+                </td>            
+            </tr>
+            
+            <tr>
+                <td colspan="4" class="hiddenRow">                    
+                    <div class="accordian-body collapse" id="collapse_sites_@(item.Id)">
+                        <div class="panel panel-default">
+                          <div id="panel-body-@(item.Id)" class="panel-body">>
+                                Загрузка
+                          </div>
+                        </div>
+                    </div> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

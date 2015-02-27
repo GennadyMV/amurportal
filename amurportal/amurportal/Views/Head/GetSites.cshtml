@@ -1,0 +1,48 @@
+﻿
+
+@{
+    Layout = "";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Индекс</th>
+            <th>Наименование</th>
+            <th>Тип</th>
+        </tr>
+    </thead>
+    <tbody>    
+        @if (ViewBag.Sites != null)    
+        {
+            foreach (var item in ViewBag.Sites)
+            {
+                <tr>
+                    <td>
+                        @item.SiteId
+                    </td>   
+                    <td>
+                        @item.SiteCode
+                    </td>                   
+                    <td>
+                        @item.Name
+                    </td>                   
+                    <td>
+                        @item.Type.Name
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" >
+                    <div>
+                        Станций нет
+                    </div> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

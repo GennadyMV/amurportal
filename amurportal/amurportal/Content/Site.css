@@ -3,3 +3,7 @@ em
     font-size:10px;
     color:Gray
 }
+
+.hiddenRow {
+    padding: 0 !important;
+}

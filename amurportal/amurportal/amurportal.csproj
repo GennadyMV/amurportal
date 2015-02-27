@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\HeadController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -389,6 +390,7 @@
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\head.js" />
     <Content Include="Scripts\jqx-all.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
@@ -503,6 +505,8 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Ajax\GetSiteParams.cshtml" />
     <Content Include="Views\Ajax\GetAllDataValue.cshtml" />
+    <Content Include="Views\Head\GetTypes.cshtml" />
+    <Content Include="Views\Head\GetSites.cshtml" />
     <None Include="Web References\Hydro\Category.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -608,7 +612,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1148</DevelopmentServerPort>
+          <DevelopmentServerPort>4964</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
