@@ -63,6 +63,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\HeadController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -390,7 +391,8 @@
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\head.js" />
+    <Content Include="Scripts\controller_report.js" />
+    <Content Include="Scripts\controller_head.js" />
     <Content Include="Scripts\jqx-all.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
@@ -507,6 +509,8 @@
     <Content Include="Views\Ajax\GetAllDataValue.cshtml" />
     <Content Include="Views\Head\GetTypes.cshtml" />
     <Content Include="Views\Head\GetSites.cshtml" />
+    <Content Include="Views\Head\GetVariables.cshtml" />
+    <Content Include="Views\Report\GetReportAgk08.cshtml" />
     <None Include="Web References\Hydro\Category.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

@@ -41,5 +41,14 @@ namespace amurportal.Controllers
             return View();
         }
 
+        public ActionResult GetVariables()
+        {
+            const int TYPE_AGK = 6;
+            Hydro.HydroService theHydro = new Hydro.HydroService();
+            Hydro.Variable[] theVariables = theHydro.GetSiteTypeVariables(TYPE_AGK, true);
+            ViewBag.Variables = theVariables;
+            return View();
+        }
+
     }
 }

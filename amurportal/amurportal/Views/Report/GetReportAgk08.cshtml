@@ -1,0 +1,81 @@
+﻿
+
+@{
+    Layout = "";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Индекс</th>
+            <th>Наименование</th>
+            <th>Дата измерения</th>
+            <th>Срок UTC</th>
+            <th>Уровень воды</th>
+            <th>Сумма осадков за 1 час</th>
+        </tr>
+    </thead>
+    <tbody>    
+        @if (ViewBag.Sites != null)    
+        {
+            foreach (var item in ViewBag.Sites)
+            {
+                <tr>
+                    <td>
+                        @item.SiteCode
+                    </td>                   
+                    <td>
+                        @item.Name
+                    </td>            
+                    
+                    <td>
+                        @foreach(var val in @ViewBag.SiteDataValues[item.SiteId])
+                        {
+                            @val.CollectDate                        
+                            break;                            
+                        }
+                    </td>
+
+                    <td>
+                        @foreach(var val in @ViewBag.SiteDataValues[item.SiteId])
+                        {
+                            @val.DateUTC
+                            break;                            
+                        }
+                    </td>
+
+                    
+                    <td>
+                        @foreach(var val in @ViewBag.SiteDataValues[item.SiteId])
+                        {
+                        
+                            @val.Value
+                            break;                            
+                        }
+                    </td>
+                    
+                    <td>
+                        @foreach(var val in @ViewBag.SiteDataValues22[item.SiteId])
+                        {
+                        
+                            @val.Value
+                            break;                            
+                        }
+                    </td>
+
+                    
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" >
+                    <div>
+                        Станций нет
+                    </div> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

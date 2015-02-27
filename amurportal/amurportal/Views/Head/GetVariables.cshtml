@@ -1,0 +1,41 @@
+﻿
+
+@{
+    Layout = "";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Наименование</th>            
+        </tr>
+    </thead>
+    <tbody>    
+        @if (ViewBag.Variables != null)    
+        {
+            foreach (var item in ViewBag.Variables)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>   
+                    <td>
+                        @item.Name
+                    </td>                   
+                    
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" >
+                    <div>
+                        Переменных нет
+                    </div> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
