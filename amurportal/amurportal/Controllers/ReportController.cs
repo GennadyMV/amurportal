@@ -43,7 +43,7 @@ namespace amurportal.Controllers
                                                 utcBeginDate, true,
                                                 utcEndDate, true,
                                                 variableId, true,
-                                                srocUTC, true,
+                                                22, true,
                                                 null, true,
                                                 null, true,
                                                 null, true);
