@@ -123,8 +123,23 @@
             $('#customWindow').jqxWindow('close');
             $('#MenuHeaderSiteName').text(selection[0].Name);
             $('#main_site_id').val(selection[0].SiteId);
-            LoadParams(selection[0].SiteId);
-            LoadDataValues(selection[0].SiteId);
+
+            $.ajax({
+                cache: false,
+                url: '/Main/Index',
+                success: function (data) {
+                    document.getElementById("content").innerHTML = data;
+
+                    var selection = $("#dataTable").jqxDataTable('getSelection');
+                    LoadParams(selection[0].SiteId);
+                    LoadDataValues(selection[0].SiteId);
+
+                },
+                error: function (x, e, thrownError) {
+                    document.getElementById("content").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';
+                }
+            });
+
         });
 
 

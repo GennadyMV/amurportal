@@ -2,6 +2,11 @@
     ViewBag.Title = "Index";
 }
 
+@if (this.IsAjax)
+{
+    Layout = "";
+}
+
 <div role="tabpanel">
 
   <!-- Nav tabs -->
