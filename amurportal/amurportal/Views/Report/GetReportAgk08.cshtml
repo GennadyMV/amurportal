@@ -4,9 +4,11 @@
     Layout = "";
 }
 
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
+            <th>#</th>
             <th>Индекс</th>
             <th>Наименование</th>
             <th>Дата измерения</th>
@@ -18,9 +20,13 @@
     <tbody>    
         @if (ViewBag.Sites != null)    
         {
+            int index = 1;
             foreach (var item in ViewBag.Sites)
             {
                 <tr>
+                    <td>
+                        @(index++)
+                    </td>             
                     <td>
                         @item.SiteCode
                     </td>                   
