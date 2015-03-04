@@ -194,5 +194,73 @@ namespace amurportal.Controllers
             Hydro.Variable[] theVariables = theHydro.GetSiteTypeVariables(siteTypeId, true);
             return View();
         }
+
+        public ActionResult GetMonitoring(int SiteId)
+        {
+            Hydro.HydroService theHydro = new HydroService();
+            //DateTime utcDateBgn = DateTime.ParseExact(date_start + " 00:00:00", "dd.MM.yyyy H:mm:ss", new CultureInfo("en-US")).AddHours(-11);
+            //DateTime utcDateEnd = DateTime.ParseExact(date_end + " 23:59:59", "dd.MM.yyyy H:mm:ss", new CultureInfo("en-US")).AddHours(-11);
+            DateTime utcDateBgn = DateTime.Now.AddDays(-30);
+            DateTime utcDateEnd = DateTime.Now;
+
+            Hydro.Site[] _sites = theHydro.GetSiteList(null, true);
+            int siteTypeId = 0;
+            if (_sites != null)
+            {
+                foreach (var site in _sites)
+                {
+                    if (site.SiteId == SiteId)
+                    {
+                        siteTypeId = site.Type.Id;
+                    }
+                }
+            }
+
+            Hydro.Variable[] theVariables = theHydro.GetSiteTypeVariables(siteTypeId, true);
+
+            List<string> theUtcDateStrings = new List<string>();
+            DateTime dt = utcDateBgn;
+            while (dt < utcDateEnd)
+            {
+                dt = dt.AddHours(1);
+                theUtcDateStrings.Add(String.Format("{0:yyyyMMddHHmmss}", dt));
+            }
+            theUtcDateStrings.Sort();
+            theUtcDateStrings.Reverse();
+            ViewBag.UtcDateStrings = theUtcDateStrings;
+
+            List<string> theVariableList = new List<string>();
+            foreach (var item in theVariables)
+            {
+                theVariableList.Add
+                    (item.Name);
+            }
+            ViewBag.VariableList = theVariableList;
+
+            Dictionary<string, List<Hydro.DataValue>> dictionary_in = new Dictionary<string, List<Hydro.DataValue>>();
+
+
+            foreach (var variable in theVariables)
+            {
+                Hydro.DataValue[] theDataValues = theHydro.GetDataValues(SiteId, true,
+                                                                utcDateBgn, true,
+                                                                utcDateEnd, true,
+                                                                variable.Id, true,
+                                                                null, true,
+                                                                null, true,
+                                                                null, true);
+                if (theDataValues == null) continue;
+                List<Hydro.DataValue> theDataValuesList = new List<Hydro.DataValue>();
+                foreach (var value in theDataValues)
+                {
+                    theDataValuesList.Add(value);
+                }
+                dictionary_in.Add(variable.Name, theDataValuesList);
+            }
+            ViewBag.Variables = theVariables;
+            ViewBag.dictionary_in = dictionary_in;
+            return View("GetAllDataValue");
+        }
+
     }
 }

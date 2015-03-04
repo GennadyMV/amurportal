@@ -19,7 +19,7 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="monitoring">Мониторинг</div>
+    <div role="tabpanel" class="tab-pane active" id="monitoring"><div id="monitoring_result"></div></div>
     <div role="tabpanel" class="tab-pane" id="profile">...</div>
     <div role="tabpanel" class="tab-pane" id="datavalues">
         <div id="sandbox-container">
@@ -49,18 +49,14 @@
                              .on('show', function (ev) {
                         ev.stopPropagation();
                     })
-                    .on('changeDate', function (ev, date) {
+                    .on('changeDate', function (ev, date) {                        
                         
-                        
-                        console.log( $("#flag").val() );
                         if ($("#flag").val() == 1) {
                          
-                         console.log("D");
-                         console.log( $("#main_site_id").val() );
                          LoadDataValues( $("#main_site_id").val() );
 
                          $("#flag").val("0");
-                         console.log( $("#flag").val() );
+                         
                         } else {
                         $("#flag").val("1");
                         }
@@ -106,10 +102,7 @@
 
     function LoadDataValues(SiteId) {
         var param = { siteid: SiteId, date_start: $("#datepicker_start").val(), date_end: $("#datepicker_end").val() };
-
-        console.log($("#datepicker_start").val());
-        console.log($("#datepicker_end").val());
-
+        
         $.ajax({
             cache: false,
             url: '@Url.Action("GetDataValues", "Ajax")',
@@ -120,6 +113,24 @@
             },
             error: function (x, e, thrownError) {
                 document.getElementById("datavalues_result").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';                
+            }
+        });
+
+        document.getElementById("datavalues_result").innerHTML = "Загрузка";
+    }
+
+    function LoadMonitoring(SiteId) {
+        var param = { siteid: SiteId };
+        $.ajax({
+            cache: false,
+            url: '@Url.Action("GetMonitoring", "Ajax")',
+            data: param,
+            success: function (data) {
+                document.getElementById("monitoring_result").innerHTML = data;
+                //$('#jqxTabsDataValues').jqxTabs({ width: '100%', height: '100%', position: 'top' });
+            },
+            error: function (x, e, thrownError) {
+                document.getElementById("monitoring_result").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';
             }
         });
 

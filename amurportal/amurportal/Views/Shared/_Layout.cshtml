@@ -133,6 +133,7 @@
                     var selection = $("#dataTable").jqxDataTable('getSelection');
                     LoadParams(selection[0].SiteId);
                     LoadDataValues(selection[0].SiteId);
+                    LoadMonitoring(selection[0].SiteId);
 
                 },
                 error: function (x, e, thrownError) {
