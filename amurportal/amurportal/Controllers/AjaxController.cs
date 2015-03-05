@@ -212,28 +212,16 @@ namespace amurportal.Controllers
                                                 null, true);
             List<object> theObjs = new List<object>();
             List<float> theInts = new List<float>();
+            List<string> theStrs = new List<string>();
             if (theDataValues != null)
             {
                 foreach (var value in theDataValues)
                 {
                     theInts.Add(value.Value);
+                    theStrs.Add(value.Date.ToLongDateString());
                 }
 
 
-                List<string> theStrs = new List<string>();
-
-                theStrs.Add("234");
-                theStrs.Add("243");
-                theStrs.Add("123");
-                theStrs.Add("234");
-                theStrs.Add("243");
-                theStrs.Add("123");
-                theStrs.Add("234");
-                theStrs.Add("243");
-                theStrs.Add("123");
-                theStrs.Add("234");
-                theStrs.Add("243");
-                theStrs.Add("123");
 
                 
                 theObjs.Add(theInts);
