@@ -195,8 +195,54 @@ namespace amurportal.Controllers
             return View();
         }
 
-        public ActionResult GetMonitoring(int SiteId)
+        public JsonResult GetMonitoring(int SiteId)
         {
+            DateTime utcBeginDate = DateTime.Now.AddDays(-30);
+            DateTime utcEndDate = DateTime.Now;
+
+            Hydro.HydroService theHydro = new HydroService();
+
+            Hydro.DataValue[] theDataValues = theHydro.GetDataValuesForReport(SiteId, true,
+                                                utcBeginDate, true,
+                                                utcEndDate, true,
+                                                2, true,
+                                                22, true,
+                                                null, true,
+                                                null, true,
+                                                null, true);
+            List<object> theObjs = new List<object>();
+            List<float> theInts = new List<float>();
+            if (theDataValues != null)
+            {
+                foreach (var value in theDataValues)
+                {
+                    theInts.Add(value.Value);
+                }
+
+
+                List<string> theStrs = new List<string>();
+
+                theStrs.Add("234");
+                theStrs.Add("243");
+                theStrs.Add("123");
+                theStrs.Add("234");
+                theStrs.Add("243");
+                theStrs.Add("123");
+                theStrs.Add("234");
+                theStrs.Add("243");
+                theStrs.Add("123");
+                theStrs.Add("234");
+                theStrs.Add("243");
+                theStrs.Add("123");
+
+                
+                theObjs.Add(theInts);
+                theObjs.Add(theStrs);
+            }
+
+            return Json(theObjs, JsonRequestBehavior.AllowGet); 
+
+            /*
             Hydro.HydroService theHydro = new HydroService();
             //DateTime utcDateBgn = DateTime.ParseExact(date_start + " 00:00:00", "dd.MM.yyyy H:mm:ss", new CultureInfo("en-US")).AddHours(-11);
             //DateTime utcDateEnd = DateTime.ParseExact(date_end + " 23:59:59", "dd.MM.yyyy H:mm:ss", new CultureInfo("en-US")).AddHours(-11);
@@ -259,7 +305,8 @@ namespace amurportal.Controllers
             }
             ViewBag.Variables = theVariables;
             ViewBag.dictionary_in = dictionary_in;
-            return View("GetAllDataValue");
+            return View();
+             * */
         }
 
     }
