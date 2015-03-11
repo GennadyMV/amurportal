@@ -6,6 +6,15 @@
     Layout = "";
 }
 
+@if (ViewBag.Error != null)
+{
+    <p>
+        @ViewBag.Error
+    </p>
+
+}
+else
+{
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -25,7 +34,7 @@
         {
             <tr>
                 <td>
-                    @String.Format("{0:dd.MM.yyyy HH:mm:ss}",DateTime.ParseExact(@item, "yyyyMMddHHmmss",
+                    @String.Format("{0:dd.MM.yyyy HH:mm:ss}", DateTime.ParseExact(@item, "yyyyMMddHHmmss",
                                        System.Globalization.CultureInfo.InvariantCulture))
                     
                 </td>
@@ -34,9 +43,9 @@
                     <th>                        
                         @if (ViewBag.dictionary_in.ContainsKey(v))
                         {
-                            
-                                int isFinded = 0;
-                            
+
+                            int isFinded = 0;
+
                             foreach (var value in ViewBag.dictionary_in[v])
                             {
                                 if (String.Format("{0:yyyyMMddHHmmss}", value.DateUTC) == item)
@@ -50,7 +59,7 @@
                               break;
                                 }
                             }
-                            if(@isFinded==0)                            
+                            if (@isFinded == 0)
                             {
                                 <em>Данных нет</em>
                             }
@@ -91,8 +100,8 @@
 
   <div class="tab-content">
     @{
-        index = -1;
-        string is_active = "";        
+    index = -1;
+    string is_active = "";        
     }
     @foreach (var item in ViewBag.Variables)
     {
@@ -182,4 +191,4 @@
 -->
 
 
-
+}

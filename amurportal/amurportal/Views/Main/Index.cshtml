@@ -28,6 +28,43 @@
                 <input id="datepicker_start" type="text" value="@(ViewBag.DateBgn)" class="input-sm form-control" name="start" />
                 <span class="input-group-addon">Конец периода:</span>
                 <input id="datepicker_end" type="text" value="@(ViewBag.DateEnd)" class="input-sm form-control" name="end" />                
+                <span class="input-group-addon">Срок UTC:</span>                
+                <select class="input-sm form-control" onchange="SelectDataValueSrok(this.options[this.selectedIndex].value)">
+                    <optgroup label="Все сроки:">
+                        <option value="24">00 - 24 час.</option>
+                    </optgroup>
+                    <optgroup label="Контрольные сроки:">
+                        <option selected value="8">08 час.</option>
+                        <option value="20">20 час.</option>
+                    </optgroup>
+                    <optgroup label="Срок за:">                        
+                        <option value="0">00 час.</option>
+                        <option value="1">01 час.</option>
+                        <option value="2">02 час.</option>
+                        <option value="3">03 час.</option>
+                        <option value="4">04 час.</option>
+                        <option value="5">05 час.</option>
+                        <option value="6">06 час.</option>
+                        <option value="7">07 час.</option>
+                        <option value="8">08 час.</option>
+                        <option value="9">09 час.</option>
+                        <option value="10">10 час.</option>
+                        <option value="11">11 час.</option>
+                        <option value="12">12 час.</option>
+                        <option value="13">13 час.</option>
+                        <option value="14">14 час.</option>
+                        <option value="15">15 час.</option>
+                        <option value="16">16 час.</option>
+                        <option value="17">17 час.</option>
+                        <option value="18">18 час.</option>
+                        <option value="19">19 час.</option>
+                        <option value="20">20 час.</option>
+                        <option value="21">21 час.</option>
+                        <option value="22">22 час.</option>
+                        <option value="23">23 час.</option>
+                    </optgroup>
+                </select>               
+
             </div>            
         </div>
         <script type="text/javascript">
@@ -64,11 +101,25 @@
                         
                         ev.stopPropagation();
                     });
-                   
-
-
              });
 
+             function SelectDataValueSrok(index) {
+                
+                if ($("#main_site_id").val()=="") {
+                    SelectPost(); 
+                    return;                   
+                }
+                if (index == 24) 
+                {
+                    LoadDataValues($("#main_site_id").val());
+                }
+                else
+                {
+                    LoadDataValuesBySrok($("#main_site_id").val(), index);
+                }
+             }
+
+           
              
     </script>
         <div id="datavalues_result"></div>
@@ -113,6 +164,25 @@
             },
             error: function (x, e, thrownError) {
                 document.getElementById("datavalues_result").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';                
+            }
+        });
+
+        document.getElementById("datavalues_result").innerHTML = "Загрузка";
+    }
+
+    function LoadDataValuesBySrok(SiteId, srokUTC) {
+        var param = { siteid: SiteId, date_start: $("#datepicker_start").val(), date_end: $("#datepicker_end").val(), srok: srokUTC };
+
+        $.ajax({
+            cache: false,
+            url: '@Url.Action("GetDataValuesBySrok", "Ajax")',
+            data: param,
+            success: function (data) {
+                document.getElementById("datavalues_result").innerHTML = data;
+                //$('#jqxTabsDataValues').jqxTabs({ width: '100%', height: '100%', position: 'top' });
+            },
+            error: function (x, e, thrownError) {
+                document.getElementById("datavalues_result").innerHTML = '<p>Ошибка запроса</p><p>' + thrownError + '</p>';
             }
         });
 
